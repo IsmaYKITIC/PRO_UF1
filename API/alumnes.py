@@ -1,12 +1,14 @@
+#Leer uno
 def alumne_schema(alumne) -> dict:
     return {
-        "Idalumne": alumne[0],
-        "Descalumne": alumne[1],
-        "Edifici": alumne[2],
-        "Pis": alumne[3],
-        "CeatedAt": alumne[4],
-        "UpdatedAt": alumne[5]
+        "IdAlumne": alumne[0],
+        "IdAula": alumne[1],
+        "NomAlumne": alumne[2],
+        "Cicle": alumne[3],
+        "Curs": alumne[4],
+        "Grup": alumne[5]
     }
 
-def alumnat_schema(alumnat) -> dict:
-    return [alumne_schema(alumne) for alumne in alumnat]
+#Leer mas de uno
+def alumnes_schema(alumnes) -> dict:
+    return [alumne_schema(alumne) for alumne in alumnes]

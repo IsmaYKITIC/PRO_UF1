@@ -12,32 +12,32 @@ from pydantic import BaseModel
 app = FastAPI()
 
 class estudiant(BaseModel):
-    Idalumne:str
+    IdAlumne: int
     IdAula: int
-    nomAlumne: str
-    cicle: str
-    curs: int
-    grup: str 
+    NomAlumne: str
+    Cicle: str
+    Curs: int
+    Grup: str 
 #get
 @app.get("/")
 def read_root():
     return {"API del Alumnat"}
 
 @app.get("/show_alumnes", response_model=List[dict])
-def read_pelis():
+def read_alumnes():
 
     pdb = db_alumnes.read()
 
-    alumnes_sch = alumnes.alumne_schema(pdb)
+    alumnes_sch = alumnes.alumnes_schema(pdb)
 
     return alumnes_sch
 
 
 @app.get("/show_alumnes/{id}", response_model=estudiant)
-def read_pelis_id(id:int):
+def read_alumnes_id(id:int):
     alumne_data = db_alumnes.read_id(id)
-    if db_alumnes.read_id(id) is not None:
-        alumne = alumne.alumne_schema(alumne_data)
+    if alumne_data is not None:
+        alumne = alumnes.alumne_schema(alumne_data)
     else:
         raise HTTPException(status_code=404, detail="Item not found")
     return alumne
@@ -45,23 +45,27 @@ def read_pelis_id(id:int):
 #POST
 
 @app.post("/create_alumne")
-async def create_film(data: estudiant):
+async def create_alumne(data: estudiant):
 
     IdAula = data.IdAula
-    Nom = data.nomAlumne
-    Cicle = data.cicle
-    Curs = data.curs
-    Grup = data.grup
+    Nom = data.NomAlumne
+    Cicle = data.Cicle
+    Curs = data.Curs
+    Grup = data.Grup
   
 
     l_alumne_id = db_alumnes.create(IdAula,Nom,Cicle,Curs,Grup)
     return {
-        "msg": "alumne creat",
+        "msg": "S’ha afegit correctement",
         "id film": l_alumne_id,
         "NomAlumne": Nom
     }
 
 #PUT
-
+@app.put("/update_alumne/{id}")
+def update_alumnes(IdAlumne,IdAula,NomAlumne,Cicle,Curs,Grup):
+    updated_records = db_alumnes.update_alumne(IdAlumne,IdAula,NomAlumne,Cicle,Curs,Grup)
+    if updated_records == 0:
+       raise HTTPException(status_code=404, detail="Items to update not found") 
 
 

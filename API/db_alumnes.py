@@ -4,7 +4,7 @@ def read():
     try:
         conn = db_client()
         cur = conn.cursor()
-        cur.execute("select * from alumnes")
+        cur.execute("select * from alumne")
     
         alumnes = cur.fetchall()
     
@@ -20,11 +20,11 @@ def read_id(id):
     try:
         conn = db_client()
         cur = conn.cursor()
-        query = "select * from aulmes WHERE IdAlumne = %s"
+        query = "select IdAlumne,IdAula, NomAlumne, Cicle, Curs, Grup from alumne WHERE IdAlumne = %s"
         value = (id,)
         cur.execute(query,value)
     
-        alumnes = cur.fetchall()
+        alumne = cur.fetchone()
     
     except Exception as e:
         return {"status": -1, "message": f"Error de connexió:{e}" }
@@ -32,13 +32,13 @@ def read_id(id):
     finally:
         conn.close()
     
-    return alumnes
+    return alumne
 #POST
 def create(IdAula,NomAlumne,Cicle,Curs,Grup):
     try:
         conn = db_client()
         cur = conn.cursor()
-        query = "insert into alumnes (IdAula,NomAlumne,Cicle,Curs,Grup) VALUES (%s,%s,%s,%s,%s);"
+        query = "insert into alumne (IdAula,NomAlumne,Cicle,Curs,Grup) VALUES (%s,%s,%s,%s,%s);"
         values=(IdAula,NomAlumne,Cicle,Curs,Grup)
         cur.execute(query,values)
     
@@ -53,14 +53,14 @@ def create(IdAula,NomAlumne,Cicle,Curs,Grup):
 
     return nouId
 #PUT
-def update_vots(titol,vots):
+def update_alumne(IdAlumne,IdAulaN,NomAlumneN,CicleN,CursN,GrupN):
     try:
         conn = db_client()
         cur = conn.cursor()
-        query = "update PELICULA SET votos = %s WHERE titulo = %s;"
-        values=(vots,titol)
+        query = "update alumne SET IdAula = %s, NomAlumne =%s , Cicle = %s, Curs = %s, Grup = %s WHERE IdAlumne = %s;"
+        values=(IdAulaN,NomAlumneN,CicleN,CursN,GrupN,IdAlumne)
         cur.execute(query,values)
-        updated_recs = cur.rowcount
+        updated_recs = cur.rowcount()
     
         conn.commit()
     

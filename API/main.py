@@ -18,7 +18,7 @@ class estudiant(BaseModel):
     Cicle: str
     Curs: int
     Grup: str 
-#get
+#GET
 @app.get("/")
 def read_root():
     return {"API del Alumnat"}
@@ -66,6 +66,14 @@ async def create_alumne(data: estudiant):
 def update_alumnes(IdAlumne,IdAula,NomAlumne,Cicle,Curs,Grup):
     updated_records = db_alumnes.update_alumne(IdAlumne,IdAula,NomAlumne,Cicle,Curs,Grup)
     if updated_records == 0:
-       raise HTTPException(status_code=404, detail="Items to update not found") 
+       raise HTTPException(status_code=404, detail="Items to update not found")
+    
+#DELETE
 
+@app.delete("/delete_alumne/{id}")
+def delete_alumne(IdAlumne: int):
+    deleted_records = db_alumnes.delete_alumnes(IdAlumne)
+    if deleted_records == 0:
+        raise HTTPException(status_code=404, detail="Item to delete not found")
+    return {"msg": "S’ha eliminat correctament"}
 

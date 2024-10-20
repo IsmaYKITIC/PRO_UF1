@@ -74,7 +74,7 @@ def update_alumne(IdAlumne,IdAulaN,NomAlumneN,CicleN,CursN,GrupN):
 
 
 #Delete
-def delete(IdAlumne):
+def delete_alumnes(IdAlumne):
     try:
         conn = db_client()
         cur = conn.cursor()

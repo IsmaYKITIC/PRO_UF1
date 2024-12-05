@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # PRO_UF1/API
 
 Exercici Pràctic: API d'Alumnes amb FastAPI
@@ -23,3 +24,6 @@ Resposta: Missatge JSON confirmant que s'ha eliminat correctament.
 6. GET /alumne/listAll
 Descripció: Retorna la informació de tots els alumnes juntament amb les dades de la seva aula, edifici i pis.
 Resposta: JSON amb la informació detallada de l'alumne i l'aula.
+=======
+# PRO_UF1
+>>>>>>> 4c0129e03436393457fdb9744c25a1f3e49d48e9

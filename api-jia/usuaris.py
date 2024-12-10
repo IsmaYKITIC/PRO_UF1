@@ -1,20 +1,17 @@
-def usuaris_schema(user) -> dict:
-    return {"Id": user[0],
-            "titol": user[1],
-            "any": user[2],
-            "puntuacio": user[3],
-            "vots": user[4] 
-            }
+#Leer uno
+def usuari_schema(usuari) -> dict:
+    return {
+        "id": usuari[0],
+        "nom": usuari[1],
+        "mail": usuari[2],
+        "password": usuari[3],
+        "direccio": usuari[4],
+        "data_naixement": usuari[5],
+        "ultim_acces": usuari[6],
+        "rol": usuari[7],
+        "data_matriculacio": usuari[8]
+    }
 
+#Leer mas de uno
 def usuaris_schema(usuaris) -> dict:
-    return [usuaris_schema(usuari) for usuari in usuaris]
-def usuaris_schema(user) -> dict:
-    return {"Id": user[0],
-            "titol": user[1],
-            "any": user[2],
-            "puntuacio": user[3],
-            "vots": user[4] 
-            }
-
-def usuaris_schema(usuaris) -> dict:
-    return [usuaris_schema(usuari) for usuari in usuaris]
+    return {usuari[0]: usuari_schema(usuari) for usuari in usuaris}

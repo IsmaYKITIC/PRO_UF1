@@ -6,7 +6,7 @@ def db_client():
         dbname = "projecte"
         user = "admin"
         password = "admin"
-        host = "localhost"
+        host = "192.168.35.1"
         port = "5432"
         
         return mysql.connector.connect(

@@ -4,9 +4,9 @@ def read():
     try:
         conn = db_client()
         cur = conn.cursor()
-        cur.execute("select * from alumne")
+        cur.execute("select * from usuaris")
     
-        alumnes = cur.fetchall()
+        usuaris = cur.fetchall()
     
     except Exception as e:
         return {"status": -1, "message": f"Error de connexió:{e}" }
@@ -14,7 +14,7 @@ def read():
     finally:
         conn.close()
     
-    return alumnes
+    return usuaris
 #GET ID
 def read_id(id):
     try:

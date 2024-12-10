@@ -1,8 +1,8 @@
 from fastapi import FastAPI,HTTPException
 
 import db_alumnes 
-import alumnes
-import aules
+import usuaris
+import settings
 
 
 from typing import List
@@ -28,7 +28,7 @@ def read_alumnes():
 
     pdb = db_alumnes.read()
 
-    alumnes_sch = alumnes.alumnes_schema(pdb)
+    alumnes_sch = usuaris.alumnes_schema(pdb)
 
     return alumnes_sch
 
@@ -37,7 +37,7 @@ def read_alumnes():
 def read_alumnes_id(id:int):
     alumne_data = db_alumnes.read_id(id)
     if alumne_data is not None:
-        alumne = alumnes.alumne_schema(alumne_data)
+        alumne = usuaris.alumne_schema(alumne_data)
     else:
         raise HTTPException(status_code=404, detail="Item not found")
     return alumne
